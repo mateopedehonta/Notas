@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,200&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+body{
+    font-family: 'Poppins';
+    background-color: #2FCCE0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+form{
+    margin: 2rem;
+    width: 50%;
+    background-color: #2FACC2;
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+textarea,input{
+    align-self: center;
+    height:2rem ;
+    width: 90%;
+    border-radius: 5px;
+    background-color: #2FACC2;
+    border:solid 1px;
+}
+#btnGuardar{
+    border: 1px solid black;
+    padding:1px ;
+    align-self: end;
+    width: max-content;
+}
+.notas{
+    margin: 2rem;
+    width: 90%;
+}
+.notas ul{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 1rem;
+}
+.nota{
+    background-color: #2FACC2;
+    padding: 2rem;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: 95% 5%;
+    grid-template-areas: 'titulo btns''text btns';
+
+}
+.btn{
+    width: 1.2rem;
+    height: max-content;
+    align-self: center;
+}
+.btn:hover{
+    transition: 2s;
+    border: 1px solid black;
+}
+.btns{
+    grid-area: btns;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.none{display: none;}
+.fas{
+    text-align: center;
+}
+.boxForm{
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    background: rgba(47,204,224, 0.8) /* Green background with 30% opacity */
+}
