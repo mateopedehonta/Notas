@@ -88,6 +88,7 @@ textarea,input{
     text-align: center;
 }
 .boxForm{
+    padding-top: 0;
     display: none;
     position: fixed;
     height: 100%;
@@ -95,4 +96,10 @@ textarea,input{
     justify-content: center;
     align-items: center;
     background: rgba(47,204,224, 0.8) /* Green background with 30% opacity */
+}
+#formEdit{
+    padding-top: 0.5rem;
+}
+.salir{
+    align-self: flex-end;
 }

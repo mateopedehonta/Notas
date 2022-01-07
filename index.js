@@ -1,4 +1,3 @@
-
 $(()=>{
     const notas = []
     const almacenado = JSON.parse(localStorage.getItem('almacenado'))
@@ -7,13 +6,15 @@ $(()=>{
             notas.push(dato)
         })
     }
-    mostrar(notas)
+    mostrar(notas,'todos')
 
     $('#form').submit((e)=>{
         e.preventDefault()
         let hijos = $(e.target).children()
         notas.push(new nota(hijos[0].value,hijos[1].value))
-        mostrar(notas)
+        hijos[0].value = ''
+        hijos[1].value = ''
+        mostrar(notas,'nuevo')
     })
     $("#mostrarLista").click(function (e) { 
         e.preventDefault();
@@ -27,7 +28,7 @@ $(()=>{
             this.notaText = nota;
         }
     }
-    function mostrar (array){
+    function mostrar (array,efect){
         limpiarHTML(lista)
         array.forEach(nota =>{
             const {titulo,notaText,id} = nota;
@@ -41,10 +42,22 @@ $(()=>{
                 </div>
             </li>
             `)
-            $(`#${notas[notas.length - 1].id}`).css('display','none')
-            $(`#${notas[notas.length - 1].id}`).fadeIn(1000)
+            switch (efect) {
+                case 'nuevo':
+                    efecto(notas[notas.length - 1].id)
+                    break;
+                case 'todos':
+                    efecto(nota.id)
+                break
+            }
+            // notas[notas.length - 1].id
         })
+        
         json(array)
+    }
+    function efecto(id){
+        $(`#${id}`).css('display','none')
+        $(`#${id}`).fadeIn(1000)
     }
     function eliminarNota(id){
         if( id !== ''){
@@ -63,10 +76,10 @@ $(()=>{
         if( id !== ''){
             notas.forEach(dato=>{
                 if(dato.id == id){
-                    // $('#tituloNota').value = nota.titulo
                     $('.boxForm').css('display','flex').append(`
                     <form id="formEdit">
-                    <H2>Editar nota</H2>
+                        <button class="salir"><i class="fas fa-times"></i></button>
+                        <H2>Editar nota</H2>
                         <input type="text"  value="${dato.titulo}">
                         <input type="text"  value="${dato.notaText}">
                         <input type="submit" value="Guardar" >
@@ -75,13 +88,19 @@ $(()=>{
                     $('#formEdit').submit((e)=>{
                         e.preventDefault()
                         let hijos = $(e.target).children()
-                        dato.titulo = hijos[1].value
-                        dato.notaText = hijos[2].value
+                        dato.titulo = hijos[2].value
+                        dato.notaText = hijos[3].value
                         $('.boxForm').css('display','none')
-                        mostrar(notas)
+                        mostrar(notas,)
+                        efecto(dato.id)
                         json(notas)
                         limpiarHTML(boxForm)
                     })
+                    $('.salir').click(function (e) {
+                        e.preventDefault();
+                        $('.boxForm').css('display','none')
+                        limpiarHTML(boxForm)
+                    });
                 }
             })
             
